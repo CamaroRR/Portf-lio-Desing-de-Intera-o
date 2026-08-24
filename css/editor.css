@@ -87,6 +87,7 @@ button.btn-danger:hover {
   gap: 10px;
   box-sizing: border-box;
   word-break: break-word;
+  width: 100%; 
 }
 
 #generatedMenu img {
@@ -98,8 +99,9 @@ button.btn-danger:hover {
 #generatedMenuList {
   display: flex;
   gap: 10px;
-  width: 100%;
+  width: 100%; 
   padding: 0;
+  margin: 0;
 }
 
 .menu-item {
