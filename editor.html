@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor de Menus - Trabalho 1</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+
+  <header>
+    <h1>Disciplina de Interação Web</h1>
+    <p>Portfólio de Trabalhos Práticos</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Apresentação</a></li>
+      <li><a href="editor.html">Trabalho 1 (Editor)</a></li>
+      <li><a href="#" class="disabled">Trabalho 2</a></li>
+      <li><a href="#" class="disabled">Trabalho 3</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="editor-container">
+      
+      <!-- Form de Edicao -->
+      <section class="editor-form">
+        <h2>Formulário de Edição</h2>
+
+        <div class="btn-group">
+          <button type="button" id="btnAddItem">Adicionar Item</button>
+          <button type="button" id="btnRemoveItem" class="btn-danger">Remover Último Item</button>
+        </div>
+
+        <div class="form-group">
+          <label for="selectItem">Selecionar Item para Editar:</label>
+          <select id="selectItem"></select>
+        </div>
+
+        <div class="form-group">
+          <label for="itemText">Texto do Item Selected:</label>
+          <input type="text" id="itemText" value="Item 1">
+        </div>
+
+        <hr><br>
+
+        <div class="form-group">
+          <label for="imageUpload">Figura do Menu:</label>
+          <input type="file" id="imageUpload" accept="image/*">
+          <button type="button" id="btnRemoveImage" class="btn-danger" style="margin-top: 5px;">Remover Imagem</button>
+        </div>
+
+        <hr><br>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bgMenuColor">Cor Fundo Menu:</label>
+            <input type="color" id="bgMenuColor" value="#2c3e50">
+          </div>
+          <div class="form-group">
+            <label for="bgItemColor">Cor Fundo Itens:</label>
+            <input type="color" id="bgItemColor" value="#3498db">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="textColor">Cor do Texto:</label>
+            <input type="color" id="textColor" value="#ffffff">
+          </div>
+          <div class="form-group">
+            <label for="borderColor">Cor da Borda:</label>
+            <input type="color" id="borderColor" value="#1a252f">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fontSize">Tamanho da Fonte (px):</label>
+          <input type="range" id="fontSize" min="12" max="28" value="16">
+        </div>
+
+        <div class="form-group">
+          <label for="borderRadius">Arredondamento Borda (px):</label>
+          <input type="range" id="borderRadius" min="0" max="20" value="4">
+        </div>
+
+        <div class="form-group">
+          <label for="flexDirection">Orientação do Menu:</label>
+          <select id="flexDirection">
+            <option value="row">Horizontal (Linha)</option>
+            <option value="column">Vertical (Coluna)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="justifyContent">Distribuição dos Itens:</label>
+          <select id="justifyContent">
+            <option value="flex-start">Início</option>
+            <option value="center">Centralizado</option>
+            <option value="space-between">Espaçado (Space Between)</option>
+            <option value="space-around">Espaçado (Space Around)</option>
+          </select>
+        </div>
+
+      </section>
+
+      <!-- Preview do Menu Gerado -->
+      <section class="editor-preview">
+        <h2>Menu Gerado</h2>
+        <div id="menuPreviewContainer">
+          <div id="generatedMenu">
+            <ul id="generatedMenuList"></ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 - Análise e Desenvolvimento de Sistemas</p>
+  </footer>
+
+  <script src="js/editor.js"></script>
+</body>
+</html>
