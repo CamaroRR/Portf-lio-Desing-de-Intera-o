@@ -1,3 +1,9 @@
+site-header,
+site-nav,
+site-footer {
+  display: block;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -68,20 +74,6 @@ footer {
   margin-bottom: 15px;
 }
 
-.card h3 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-}
-
-.card-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
 .intro-cards {
   display: flex;
   gap: 20px;
@@ -89,11 +81,3 @@ footer {
   flex-wrap: wrap;
 }
 
-.card {
-  flex: 1;
-  min-width: 250px;
-  background-color: var(--bg-color);
-  padding: 20px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-}

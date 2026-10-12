@@ -111,3 +111,7 @@ button.btn-danger:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+#btnRemoveImage {
+  margin-top: 5px;
+}

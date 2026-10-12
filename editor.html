@@ -8,22 +8,12 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/editor.css">
+  <script src="js/components.js" defer></script>
 </head>
 <body>
 
-  <header>
-    <h1>Disciplina Design de Interação</h1>
-    <p>Portfólio de Trabalhos Práticos</p>
-  </header>
-
-  <nav>
-    <ul>
-      <li><a href="index.html">Apresentação</a></li>
-      <li><a href="editor.html">Trabalho 1 (Editor)</a></li>
-      <li><a href="#" class="disabled">Trabalho 2</a></li>
-      <li><a href="#" class="disabled">Trabalho 3</a></li>
-    </ul>
-  </nav>
+  <site-header></site-header>
+  <site-nav></site-nav>
 
   <main>
     <div class="editor-container">
@@ -43,7 +33,7 @@
         </div>
 
         <div class="form-group">
-          <label for="itemText">Texto do Item Selected:</label>
+          <label for="itemText">Texto do Item Selecionado:</label>
           <input type="text" id="itemText" value="Item 1">
         </div>
 
@@ -52,7 +42,7 @@
         <div class="form-group">
           <label for="imageUpload">Figura do Menu:</label>
           <input type="file" id="imageUpload" accept="image/*">
-          <button type="button" id="btnRemoveImage" class="btn-danger" style="margin-top: 5px;">Remover Imagem</button>
+          <button type="button" id="btnRemoveImage" class="btn-danger">Remover Imagem</button>
         </div>
 
         <hr><br>
@@ -122,9 +112,7 @@
     </div>
   </main>
 
-  <footer>
-    <p>&copy; 2026 - Análise e Desenvolvimento de Sistemas</p>
-  </footer>
+  <site-footer></site-footer>
 
   <script src="js/editor.js"></script>
 </body>
