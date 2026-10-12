@@ -5,7 +5,7 @@ class SiteHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <header>
-        <h1>Disciplina Design de Interação</h1>
+        <p class="site-title">Disciplina Design de Interação</p>
         <p>Portfólio de Trabalhos Práticos</p>
       </header>
     `;
