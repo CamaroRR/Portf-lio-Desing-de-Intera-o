@@ -20,9 +20,21 @@ class SiteNav extends HTMLElement {
           <li><a href="index.html">Apresentação</a></li>
           <li><a href="editor.html">Trabalho 1 (Editor)</a></li>
           <li><a href="prova.html">Trabalho 2 (Prova)</a></li>
+          <li><a href="livros.html">Trabalho 3 (Catálogo de Livros)</a></li>
         </ul>
       </nav>
     `;
+    this.marcarPaginaAtual();
+  }
+
+  // Destaca no menu o link da pagina que esta aberta
+  marcarPaginaAtual() {
+    const paginaAtual = window.location.pathname.split("/").pop() || "index.html";
+    this.querySelectorAll("a").forEach((link) => {
+      if (link.getAttribute("href") === paginaAtual) {
+        link.setAttribute("aria-current", "page");
+      }
+    });
   }
 }
 

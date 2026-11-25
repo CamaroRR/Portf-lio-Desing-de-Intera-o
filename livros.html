@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Livros - Trabalho 3</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/livros.css">
+  <script src="js/components.js" defer></script>
+  <script type="module" src="js/livros/livros.js"></script>
+</head>
+<body>
+
+  <site-header></site-header>
+  <site-nav></site-nav>
+
+  <main>
+    <h1 class="page-title">Trabalho 3: Catálogo de Livros de Programação</h1>
+
+    <div id="aviso" class="aviso" role="status" hidden></div>
+    <p id="carregandoTela" class="carregando" hidden>Carregando...</p>
+
+    <!-- ===== Tela 1: consulta do catálogo (busca + destaques) ===== -->
+    <section id="telaInicio" class="tela" aria-labelledby="tituloInicio">
+      <h2 id="tituloInicio" class="titulo-tela" tabindex="-1">Consultar catálogo</h2>
+
+      <form id="formBusca" class="painel busca" role="search">
+        <label for="campoBusca">Procure um livro pelo título ou autor</label>
+        <div class="busca-linha">
+          <input type="search" id="campoBusca" name="busca" placeholder="Ex.: java, algoritmos, Deitel..." autocomplete="off" aria-describedby="dicaBusca">
+          <button type="submit" class="btn">Buscar</button>
+        </div>
+        <p id="dicaBusca" class="dica">Digite pelo menos uma palavra com 3 letras ou mais. Acentos não fazem diferença.</p>
+      </form>
+
+      <div id="resultados" class="resultados" aria-live="polite" hidden>
+        <p id="resumoBusca" class="resumo-busca"></p>
+        <div id="listaResultados" class="lista-livros"></div>
+
+        <!-- Só um destes dois aparece: depende de a busca ter achado livros ou não -->
+        <p id="chamadaNenhumDesses" class="chamada-cadastro" hidden>
+          Não é nenhum desses?
+          <a href="#cadastrar" class="btn btn-secundario">Cadastrar novo livro</a>
+        </p>
+        <p id="chamadaSemResultados" class="chamada-cadastro chamada-destaque" hidden>
+          <span id="textoSemResultados"></span>
+          <a href="#cadastrar" class="btn">Cadastrar este livro</a>
+        </p>
+      </div>
+
+      <section class="destaques" aria-labelledby="tituloDestaques">
+        <h2 id="tituloDestaques">Destaques do catálogo</h2>
+        <div class="destaques-grade">
+          <article id="destaqueMaisAvaliado" class="destaque">
+            <h3 class="destaque-rotulo">Mais avaliado</h3>
+            <div class="destaque-corpo"></div>
+          </article>
+          <article id="destaqueMelhorAvaliado" class="destaque">
+            <h3 class="destaque-rotulo">Melhor avaliado</h3>
+            <div class="destaque-corpo"></div>
+          </article>
+          <article id="destaqueUltimoCadastrado" class="destaque">
+            <h3 class="destaque-rotulo">Último cadastrado</h3>
+            <div class="destaque-corpo"></div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <!-- ===== Tela 2: um livro e suas avaliações ===== -->
+    <section id="telaLivro" class="tela" aria-labelledby="tituloLivro" hidden>
+      <p class="link-voltar"><a href="#">← Voltar ao catálogo</a></p>
+
+      <div class="painel livro-detalhe">
+        <h2 id="tituloLivro" class="titulo-tela" tabindex="-1">Livro</h2>
+        <p id="autorLivro" class="livro-autor"></p>
+        <p id="tagsLivro" class="livro-tags"></p>
+        <p id="notaLivro" class="livro-nota"></p>
+        <p id="recomendaLivro" class="livro-recomenda"></p>
+        <div class="acoes">
+          <a id="linkAvaliarLivro" class="btn" href="#">Avaliar este livro</a>
+          <a id="linkEditarLivro" class="btn btn-secundario" href="#">Editar dados do livro</a>
+          <button type="button" id="btnExcluirLivro" class="btn btn-perigo">Excluir livro</button>
+        </div>
+      </div>
+
+      <h3 class="subtitulo">Avaliações dos alunos</h3>
+      <div id="listaAvaliacoes" class="lista-avaliacoes"></div>
+    </section>
+
+    <!-- ===== Tela 3: formulário (cadastrar livro, avaliar, editar) ===== -->
+    <section id="telaFormulario" class="tela" aria-labelledby="tituloFormulario" hidden>
+      <p class="link-voltar"><a id="linkVoltarFormulario" href="#">← Voltar</a></p>
+
+      <form id="formLivro" class="painel form-livro" novalidate>
+        <h2 id="tituloFormulario" class="titulo-tela" tabindex="-1">Formulário</h2>
+        <p id="avaliandoLivro" class="avaliando" hidden></p>
+
+        <fieldset id="grupoLivro" class="grupo">
+          <legend>Dados do livro</legend>
+
+          <div class="campo">
+            <label for="titulo">Título do livro <span class="obrigatorio" aria-hidden="true">*</span></label>
+            <input type="text" id="titulo" name="titulo" maxlength="150" required>
+          </div>
+
+          <div class="campo">
+            <label for="autor">Autor(es)</label>
+            <input type="text" id="autor" name="autor" maxlength="120">
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="linguagem">Linguagem / assunto</label>
+              <select id="linguagem" name="linguagem">
+                <option value="">Não informado</option>
+                <option>Lógica de Programação</option>
+                <option>Python</option>
+                <option>Java</option>
+                <option>JavaScript</option>
+                <option>C</option>
+                <option>C++</option>
+                <option>C#</option>
+                <option>PHP</option>
+                <option>Banco de Dados (SQL)</option>
+                <option>Boas Práticas</option>
+                <option>Outra</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="nivel">Nível do livro</label>
+              <select id="nivel" name="nivel">
+                <option value="">Não informado</option>
+                <option>Iniciante</option>
+                <option>Intermediário</option>
+                <option>Avançado</option>
+              </select>
+            </div>
+          </div>
+
+          <p class="dica"><span class="obrigatorio" aria-hidden="true">*</span> Só o título é obrigatório.</p>
+        </fieldset>
+
+        <fieldset id="grupoAvaliacao" class="grupo">
+          <legend>Sua avaliação</legend>
+          <p class="dica">Os campos são opcionais, mas preencha pelo menos uma nota, a recomendação ou um comentário. Notas de 1 (ruim) a 5 (excelente).</p>
+
+          <fieldset class="nota">
+            <legend>Didática <span class="dica">— explica os conceitos de forma clara?</span></legend>
+            <div class="escala">
+              <input type="radio" id="didatica1" name="nota_didatica" value="1">
+              <label for="didatica1">1</label>
+              <input type="radio" id="didatica2" name="nota_didatica" value="2">
+              <label for="didatica2">2</label>
+              <input type="radio" id="didatica3" name="nota_didatica" value="3">
+              <label for="didatica3">3</label>
+              <input type="radio" id="didatica4" name="nota_didatica" value="4">
+              <label for="didatica4">4</label>
+              <input type="radio" id="didatica5" name="nota_didatica" value="5">
+              <label for="didatica5">5</label>
+              <button type="button" class="btn-limpar" data-limpar="nota_didatica" aria-label="Limpar nota de didática">Limpar</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="nota">
+            <legend>Exemplos práticos <span class="dica">— os códigos de exemplo ajudam?</span></legend>
+            <div class="escala">
+              <input type="radio" id="exemplos1" name="nota_exemplos" value="1">
+              <label for="exemplos1">1</label>
+              <input type="radio" id="exemplos2" name="nota_exemplos" value="2">
+              <label for="exemplos2">2</label>
+              <input type="radio" id="exemplos3" name="nota_exemplos" value="3">
+              <label for="exemplos3">3</label>
+              <input type="radio" id="exemplos4" name="nota_exemplos" value="4">
+              <label for="exemplos4">4</label>
+              <input type="radio" id="exemplos5" name="nota_exemplos" value="5">
+              <label for="exemplos5">5</label>
+              <button type="button" class="btn-limpar" data-limpar="nota_exemplos" aria-label="Limpar nota de exemplos práticos">Limpar</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="nota">
+            <legend>Exercícios <span class="dica">— tem bons exercícios para praticar?</span></legend>
+            <div class="escala">
+              <input type="radio" id="exercicios1" name="nota_exercicios" value="1">
+              <label for="exercicios1">1</label>
+              <input type="radio" id="exercicios2" name="nota_exercicios" value="2">
+              <label for="exercicios2">2</label>
+              <input type="radio" id="exercicios3" name="nota_exercicios" value="3">
+              <label for="exercicios3">3</label>
+              <input type="radio" id="exercicios4" name="nota_exercicios" value="4">
+              <label for="exercicios4">4</label>
+              <input type="radio" id="exercicios5" name="nota_exercicios" value="5">
+              <label for="exercicios5">5</label>
+              <button type="button" class="btn-limpar" data-limpar="nota_exercicios" aria-label="Limpar nota de exercícios">Limpar</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="nota">
+            <legend>Você recomendaria este livro para outros alunos?</legend>
+            <div class="escala escala-sim-nao">
+              <input type="radio" id="recomendaSim" name="recomenda" value="sim">
+              <label for="recomendaSim">Sim</label>
+              <input type="radio" id="recomendaNao" name="recomenda" value="nao">
+              <label for="recomendaNao">Não</label>
+              <button type="button" class="btn-limpar" data-limpar="recomenda" aria-label="Limpar recomendação">Limpar</button>
+            </div>
+          </fieldset>
+
+          <div class="campo">
+            <label for="comentario">Comentário</label>
+            <textarea id="comentario" name="comentario" rows="4" maxlength="500" aria-describedby="contadorComentario"></textarea>
+            <p id="contadorComentario" class="contador-caracteres">0 de 500 caracteres</p>
+          </div>
+
+          <div class="campo">
+            <label for="avaliador">Seu nome</label>
+            <input type="text" id="avaliador" name="avaliador" maxlength="80" autocomplete="name">
+          </div>
+        </fieldset>
+
+        <div class="form-acoes">
+          <a id="linkCancelarFormulario" href="#" class="btn btn-secundario">Cancelar</a>
+          <button type="submit" id="btnSalvar" class="btn">Salvar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== Modelos usados pelo JavaScript para montar os cards ===== -->
+    <template id="modeloResultado">
+      <article class="livro">
+        <h3 class="livro-titulo"></h3>
+        <p class="livro-autor"></p>
+        <p class="livro-tags"></p>
+        <p class="livro-nota"></p>
+        <p class="livro-recomenda"></p>
+        <div class="acoes">
+          <a class="btn btn-secundario link-ver" href="#">Ver avaliações</a>
+          <a class="btn link-avaliar" href="#">Avaliar este livro</a>
+        </div>
+      </article>
+    </template>
+
+    <template id="modeloAvaliacao">
+      <article class="avaliacao">
+        <p class="avaliacao-cabecalho"><strong class="avaliador"></strong> <span class="data"></span></p>
+        <dl class="livro-notas">
+          <div>
+            <dt>Didática</dt>
+            <dd class="nota-didatica"></dd>
+          </div>
+          <div>
+            <dt>Exemplos práticos</dt>
+            <dd class="nota-exemplos"></dd>
+          </div>
+          <div>
+            <dt>Exercícios</dt>
+            <dd class="nota-exercicios"></dd>
+          </div>
+        </dl>
+        <p class="livro-recomenda"></p>
+        <blockquote class="livro-comentario"></blockquote>
+        <div class="acoes">
+          <a class="btn btn-secundario link-editar" href="#">Editar</a>
+          <button type="button" class="btn btn-perigo btn-excluir">Excluir</button>
+        </div>
+      </article>
+    </template>
+
+    <!-- ===== Caixa de confirmação de exclusão ===== -->
+    <dialog id="dialogConfirmar" class="dialogo" aria-labelledby="tituloDialogo">
+      <div class="dialogo-conteudo">
+        <h2 id="tituloDialogo">Confirmar exclusão</h2>
+        <p id="textoConfirmacao"></p>
+        <div class="dialogo-acoes">
+          <button type="button" class="btn btn-secundario" id="btnCancelarDialogo">Cancelar</button>
+          <button type="button" class="btn btn-perigo" id="btnConfirmarDialogo">Excluir</button>
+        </div>
+      </div>
+    </dialog>
+  </main>
+
+  <site-footer></site-footer>
+
+</body>
+</html>
